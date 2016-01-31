@@ -65,7 +65,7 @@ Timer = React.createClass({
 		else {
 			return (
 				<div>
-					<div className="glyphicon glyphicon-pause timer-control" onClick={this.pauseTimer}><span></span></div>
+					<div className="glyphicon glyphicon-pause timer-control" onClick={this.pauseTimer}></div>
 		      		<div className="glyphicon glyphicon-repeat timer-control" onClick={this.resetTimer}></div>
 		      	</div>
 			);
@@ -98,7 +98,7 @@ Timer = React.createClass({
 		return (
 			<div className="col-xs-12">
 				<div className="time-box">{this.renderTimer()}</div>
-				<div className="control-box full-height">{this.renderControls()}</div>
+				<div className="control-box">{this.renderControls()}</div>
 		    </div>
 		)
 	}

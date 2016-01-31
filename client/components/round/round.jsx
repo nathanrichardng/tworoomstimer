@@ -45,7 +45,7 @@ Round = React.createClass({
 			hostages.push(<i key={i} className="fa fa-user hostage"></i>);
 		}
 		return(
-			<div className="hostages">
+			<div className="hostages col-xs-12">
 				<h3>Hostages</h3>
 				{hostages}
 			</div>
