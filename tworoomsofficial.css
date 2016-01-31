@@ -1,1 +1,86 @@
 /* CSS declarations go here */
+body {
+	background-color: #585B63;
+}
+.round-display {
+	background-color: #333;
+    background: -webkit-linear-gradient(#333, #615959); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#333, #615959); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#333, #615959); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#333, #615959); /* Standard syntax */
+	color:#fff;
+	padding-left: 30px;
+}
+
+.timer-box {
+	padding: 10px;
+	background-color: #B03030;
+	height: 80px;
+	min-width: 260px;
+}
+
+.time-box {
+	display: inline-block;
+	float: left;
+}
+
+.control-box {
+	display: inline-block;
+	float: right;
+}
+
+.timer-minutes, .timer-seconds {
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	margin: 5px;
+	background-color: #9C3A3A;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+	font-size: 24px;
+}
+
+.times-up {
+	height: 50px;
+	line-height: 50px;
+	margin: 5px;
+	background-color: #9C3A3A;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 24px;
+}
+
+.timer-control {
+	color: #fff;
+	background-color: #77A5D9;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	margin: 5px;
+	text-align: center;
+	position: relative;
+	top: 30px;
+	transform: translateY(-30px);
+	font-size: 18px;
+	border-radius: 50%;
+	box-shadow: 1px 2px 5px #333;
+}
+
+.timer-control:active {
+	box-shadow: 1px 2px 1px #506A87;
+}
+
+.hostages {
+	padding-left: 30px;
+	color: #fff;
+}
+
+.hostage {
+	font-size: 100px;
+	color: #878C99;
+	padding: 7px;
+}
