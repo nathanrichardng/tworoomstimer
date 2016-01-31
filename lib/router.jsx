@@ -1,7 +1,7 @@
 FlowRouter.route('/', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { 
-			content: <Round round={3} players={11} />
+			content: <Round round={1} players={22} />
         });
 	}
 });

@@ -1,7 +1,10 @@
 /* CSS declarations go here */
-body {
+html, body {
 	background-color: #585B63;
+	width: auto;
+	overflow: hidden;
 }
+
 .round-display {
 	background-color: #333;
     background: -webkit-linear-gradient(#333, #615959); /* For Safari 5.1 to 6.0 */
@@ -64,10 +67,14 @@ body {
 	text-align: center;
 	position: relative;
 	top: 30px;
+	-ms-transform: translateY(-30px);
+   	-webkit-transform: translateY(-30px);
 	transform: translateY(-30px);
 	font-size: 18px;
 	border-radius: 50%;
 	box-shadow: 1px 2px 5px #333;
+	-moz-box-shadow:    1px 2px 5px #333;
+  	-webkit-box-shadow: 1px 2px 5px #333;
 }
 
 .timer-control:active {

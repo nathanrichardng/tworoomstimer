@@ -96,7 +96,7 @@ Timer = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="timer-box col-xs-12">
+			<div className="col-xs-12">
 				<div className="time-box">{this.renderTimer()}</div>
 				<div className="control-box full-height">{this.renderControls()}</div>
 		    </div>

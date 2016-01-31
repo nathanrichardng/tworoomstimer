@@ -45,7 +45,7 @@ Round = React.createClass({
 			hostages.push(<i key={i} className="fa fa-user hostage"></i>);
 		}
 		return(
-			<div className="col-xs-12 hostages">
+			<div className="hostages">
 				<h3>Hostages</h3>
 				{hostages}
 			</div>
@@ -57,7 +57,7 @@ Round = React.createClass({
 				<div className="col-xs-12 round-display">
 					<h3>Round {this.props.round}</h3>
 				</div>
-				<div className="col-xs-12">
+				<div className="col-xs-12 timer-box">
 					<Timer minutes={this.calculateTimerLength()} />
 				</div>
 				{this.renderHostages()}
