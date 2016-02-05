@@ -10,6 +10,14 @@ Timer = React.createClass({
 		  secondsRemaining: '00'
 		};
 	},
+	componentWillReceiveProps(nextProps){
+		this.setState({ 
+			endTime: null,
+			paused: true,
+			minutesRemaining: nextProps.minutes,
+			secondsRemaining: '00'
+		});
+	},
 	tick: function() {
 		if (this.state.paused || this.timesUp() ) {
 			this.setState({ paused:true });
