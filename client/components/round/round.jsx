@@ -35,7 +35,7 @@ Round = React.createClass({
 				return 1;
 			}
 		}
-		else if(this.props.players >= 11) {
+		else if(this.props.players >= 14) {
 			if(this.props.round === 1) {
 				return 2;
 			}
