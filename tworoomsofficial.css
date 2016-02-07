@@ -95,3 +95,14 @@ html, body {
 	color: #878C99;
 	padding: 7px;
 }
+
+.next-round-button {
+	background-color: steelblue;
+	float: right;
+	position: absolute;
+	right: 20px;
+	bottom: 30px;
+	width: 150px;
+	height: 40px;
+	color: #fff;
+}

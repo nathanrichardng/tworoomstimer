@@ -1,10 +1,17 @@
 Round = React.createClass({
 	propTypes: {
 		round: React.PropTypes.number,
-		players: React.PropTypes.number,
-		onRoundOver: React.PropTypes.func
+		players: React.PropTypes.number
+	},
+	getInitialState() {
+		return {
+			roundOver: false
+		}
 	},
 	calculateTimerLength() {
+		if(this.state.roundOver) {
+			return 0;
+		}
 		switch(this.props.round) {
 			case 1:
 				return 3;
@@ -41,8 +48,11 @@ Round = React.createClass({
 		}
 	},
 	onRoundOver() {
-		console.log("round over!");
-		this.props.onRoundOver();
+		this.setState({ roundOver: true });
+	},
+	nextRound() {
+		this.setState({ roundOver: false });
+		this.props.nextRound();
 	},
 	renderHostages() {
 		var hostages = [];
@@ -68,6 +78,9 @@ Round = React.createClass({
 						onRoundOver={this.onRoundOver} />
 				</div>
 				{this.renderHostages()}
+				<NextRoundButton
+					roundOver={this.state.roundOver}
+					nextRound={this.nextRound} />
 			</div>
 		)
 	}
