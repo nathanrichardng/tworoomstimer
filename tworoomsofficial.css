@@ -105,4 +105,18 @@ html, body {
 	width: 150px;
 	height: 40px;
 	color: #fff;
+	animation-name: fromRight;
+	animation-duration: .2s;
+}
+
+/* Chrome, Safari, Opera */ 
+@-webkit-keyframes fromRight {
+    from {right: -150px;}
+    to {right: 20px;}
+} 
+
+/* Standard syntax */ 
+@keyframes mymove {
+    from {right: -150px;}
+    to {right: 20px;}
 }

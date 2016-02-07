@@ -17,14 +17,19 @@ Game = React.createClass({
 	},
 
 	render() {
-		return(
-			<div>
+		if(this.state.round > 3) {
+			return (
+				<PostGame />
+			)
+		}
+		else {
+			return(
 				<Round 
 					round={this.state.round} 
 					players={this.state.players} 
 					onRoundOver={this.onRoundOver}
 					nextRound={this.nextRound} />
-			</div>
-		)
+			)
+		}
 	}
 });
