@@ -1,7 +1,8 @@
 Round = React.createClass({
 	propTypes: {
 		round: React.PropTypes.number,
-		players: React.PropTypes.number
+		players: React.PropTypes.number,
+		onRoundOver: React.PropTypes.func
 	},
 	calculateTimerLength() {
 		switch(this.props.round) {
@@ -39,6 +40,10 @@ Round = React.createClass({
 			return 1;
 		}
 	},
+	onRoundOver() {
+		console.log("round over!");
+		this.props.onRoundOver();
+	},
 	renderHostages() {
 		var hostages = [];
 		for (var i=0; i<this.calculateHostages(); i++) {
@@ -58,7 +63,9 @@ Round = React.createClass({
 					<h3>Round {this.props.round}</h3>
 				</div>
 				<div className="col-xs-12 timer-box">
-					<Timer minutes={this.calculateTimerLength()} />
+					<Timer 
+						minutes={this.calculateTimerLength()}
+						onRoundOver={this.onRoundOver} />
 				</div>
 				{this.renderHostages()}
 			</div>

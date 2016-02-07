@@ -6,13 +6,33 @@ Game = React.createClass({
 	getInitialState() {
 		return {
 			round: 1,
+			roundOver: false,
 			players: this.props.players
 		}
 	},
 
+	onRoundOver() {
+		console.log("called game round over");
+		this.setState({ roundOver: true });
+	},
+
 	nextRound() {
 		var nextRound = this.state.round + 1;
-		this.setState({ round: nextRound });
+		this.setState({ round: nextRound, roundOver: false });
+		console.log(this.state.roundOver);
+	},
+
+	renderNextRoundButton() {
+		if(this.state.roundOver) {
+			return(
+				<button onClick={this.nextRound}>Next Round</button>
+			)
+		}
+		else {
+			return (
+				<div></div>
+			)
+		}
 	},
 
 	render() {
@@ -20,8 +40,9 @@ Game = React.createClass({
 			<div>
 				<Round 
 					round={this.state.round} 
-					players={this.state.players} />
-				<button onClick={this.nextRound}>Next Round</button>
+					players={this.state.players} 
+					onRoundOver={this.onRoundOver}/>
+				{this.renderNextRoundButton()}
 			</div>
 		)
 	}

@@ -1,13 +1,15 @@
 Timer = React.createClass({
 	propTypes: {
-		minutes: React.PropTypes.number
+		minutes: React.PropTypes.number,
+		onRoundOver: React.PropTypes.func
 	},
 	getInitialState: function() {
 		return {
 		  endTime: null,
 		  paused: true,
-		  minutesRemaining: this.props.minutes,
-		  secondsRemaining: '00'
+		  minutesRemaining: 0,
+		  secondsRemaining: '05',
+		  interval: null
 		};
 	},
 	componentWillReceiveProps(nextProps){
@@ -19,7 +21,10 @@ Timer = React.createClass({
 		});
 	},
 	tick: function() {
-		if (this.state.paused || this.timesUp() ) {
+		if(this.timesUp()) {
+			this.onRoundOver();
+		}
+		else if (this.state.paused) {
 			this.setState({ paused:true });
 		  	this.clearInterval();
 		}
@@ -35,13 +40,17 @@ Timer = React.createClass({
 	timesUp: function() {
 		return this.state.minutesRemaining <= 0 && this.state.secondsRemaining <= 0;
 	},
+	onRoundOver() {
+		this.clearInterval();
+		this.props.onRoundOver();
+	},
 	startTimer: function() {
 		if(!this.state.paused) { return }
 		this.setState({ 
 			endTime: moment().add(this.state.minutesRemaining, 'minutes').add(this.state.secondsRemaining, 'seconds'),
 			paused: false 
 		});
-		this.interval = setInterval(this.tick, 500);
+		this.setState({ interval: setInterval(this.tick, 500) });
 	},
 	pauseTimer: function() {
 		this.setState({ endTime:null, paused:true })
@@ -51,7 +60,7 @@ Timer = React.createClass({
 		this.setState(this.getInitialState());
 	},
 	clearInterval: function() {
-		clearInterval(this.interval);
+		clearInterval(this.state.interval);
 	},
 	componentWillUnmount: function() {
 		this.clearInterval();
