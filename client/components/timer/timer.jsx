@@ -8,8 +8,7 @@ Timer = React.createClass({
 		  endTime: null,
 		  paused: true,
 		  minutesRemaining: this.props.minutes,
-		  secondsRemaining: '00',
-		  interval: null
+		  secondsRemaining: '00'
 		};
 	},
 	componentWillReceiveProps(nextProps){
@@ -50,7 +49,7 @@ Timer = React.createClass({
 			endTime: moment().add(this.state.minutesRemaining, 'minutes').add(this.state.secondsRemaining, 'seconds'),
 			paused: false 
 		});
-		this.setState({ interval: setInterval(this.tick, 500) });
+		this.interval = setInterval(this.tick, 500);
 	},
 	pauseTimer: function() {
 		this.setState({ endTime:null, paused:true })
@@ -60,7 +59,7 @@ Timer = React.createClass({
 		this.setState(this.getInitialState());
 	},
 	clearInterval: function() {
-		clearInterval(this.state.interval);
+		clearInterval(this.interval);
 	},
 	componentWillUnmount: function() {
 		this.clearInterval();

@@ -7,7 +7,7 @@ NextRoundButton = React.createClass({
 		if(this.props.roundOver) {
 			return(
 				<button className="next-round-button btn" onClick={this.props.nextRound}>
-					Next Round <span className="glyphicon glyphicon-menu-right"></span>
+					Next Round <span className="glyphicon glyphicon-menu-right"></span>  
 				</button>
 			)
 		}

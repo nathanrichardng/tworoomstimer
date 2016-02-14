@@ -5,6 +5,22 @@ html, body {
 	overflow-x: hidden;
 }
 
+.set-select {
+	background-color: steelblue;
+	color: #fff;
+	overflow: hidden;
+	padding: 20px;
+}
+
+.set-select option {
+	padding: 20px;
+}
+
+.start-button {
+	padding: 10px;
+	background-color: #C44949;
+}
+
 .round-display {
 	background-color: #333;
     background: -webkit-linear-gradient(#333, #615959); /* For Safari 5.1 to 6.0 */

@@ -1,4 +1,12 @@
-Home = React.createClass({
+StartMenu = React.createClass({
+	
+	getInitialState() {
+		return {
+			setOptions: CardSets.GetSets(),
+			selected: []
+		}
+	},
+
 	render() {
 		return(
 			<div className="container">
@@ -12,10 +20,13 @@ Home = React.createClass({
 			      </nav>
 			    </div>
 				<div className="jumbotron">
-					<h3>Home Page</h3>
-					<p>Generic home page for the time being</p>
+					<h3>Which sets are you playing with?</h3>
 				</div>
-				<a href="/start"><button className="btn btn-info col-xs-12">Play with Cards</button></a>
+				<SelectMultiple
+					options={this.state.setOptions}
+					className="col-xs-12 set-select" />
+
+				<a href="/game"><button className="btn btn-info col-xs-12 start-button">Start</button></a>
 			</div>
 		)
 	}

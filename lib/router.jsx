@@ -6,6 +6,14 @@ FlowRouter.route('/', {
 	}
 });
 
+FlowRouter.route('/start', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { 
+			content: <StartMenu />
+        });
+	}
+});
+
 FlowRouter.route('/game', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { 
