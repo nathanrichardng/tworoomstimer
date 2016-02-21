@@ -8,7 +8,7 @@ Timer = React.createClass({
 		  endTime: null,
 		  paused: true,
 		  minutesRemaining: '0',
-		  secondsRemaining: '05'
+		  secondsRemaining: '00'
 		};
 	},
 	componentWillReceiveProps(nextProps){
