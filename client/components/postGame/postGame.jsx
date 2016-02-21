@@ -38,14 +38,27 @@ PostGame = React.createClass({
 		}
 		else if(this.state.stage === "DisplayWinners") {
 			return(
-				<div>Winners to be displayed here</div>
+				//refactor this to be its own component that displays winner and loser array
+				<div>
+					<WinnersList winners={this.state.winners} />
+					<LosersList losers={this.state.losers} />
+				</div>
 			)
 		}
 	},
 	render() {
 		console.log(this.props.selected);
 		return(
-			<div className="row">
+			<div className="container">
+				<div className="row">
+			      <nav className='navbar navbar-default'>
+			        <div className='container-fluid'>
+			          <div className='navbar-header'>
+			            <a className="navbar-brand" href="/"><i className="fa fa-bomb"></i> 2R1B</a>
+			          </div>
+			        </div>
+			      </nav>
+			    </div>
 				{this.renderStage()}
 			</div>
 		)

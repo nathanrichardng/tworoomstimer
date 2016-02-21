@@ -133,14 +133,31 @@ html, body {
 	animation-duration: .2s;
 }
 
+.winners {
+	background-color: #68D483;
+	padding: 1px 10px;
+	border-radius: 6px;
+	margin-bottom: 20px;
+}
+
+.winners h3 {
+	color: #fff;
+	text-shadow: 1px 1px 10px #333;
+}
+
+.losers {
+	background-color: #B9BBBD;
+	padding: 1px 10px;
+	border-radius: 6px;
+}
+
+.losers h3 {
+	color: #333;
+	text-shadow: 1px 1px 10px #fff;
+}
+
 /* Chrome, Safari, Opera */ 
 @-webkit-keyframes fromRight {
-    from {right: -150px;}
-    to {right: 20px;}
-} 
-
-/* Standard syntax */ 
-@keyframes mymove {
     from {right: -150px;}
     to {right: 20px;}
 }
