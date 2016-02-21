@@ -1,10 +1,13 @@
-StartMenu = React.createClass({
+SelectSets = React.createClass({
 	
-	getInitialState() {
-		return {
-			setOptions: CardSets.GetSets(),
-			selected: []
-		}
+	propTypes: {
+		setOptions: React.PropTypes.array,
+		selectSets: React.PropTypes.func
+	},
+
+	selectSets() {
+		var selected = this.refs.select.getSelected();
+		this.props.selectSets(selected);
 	},
 
 	render() {
@@ -23,10 +26,11 @@ StartMenu = React.createClass({
 					<h3>Which sets are you playing with?</h3>
 				</div>
 				<SelectMultiple
-					options={this.state.setOptions}
+					ref="select"
+					options={this.props.setOptions}
 					className="col-xs-12 set-select" />
 
-				<a href="/game"><button className="btn btn-info col-xs-12 start-button">Start</button></a>
+				<button className="btn btn-info col-xs-12 start-button" onClick={this.selectSets}>Next</button>
 			</div>
 		)
 	}

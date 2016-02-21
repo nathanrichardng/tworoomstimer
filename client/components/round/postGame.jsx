@@ -1,5 +1,16 @@
 PostGame = React.createClass({
+	propTypes: {
+		selected: React.PropTypes.array
+	},
+	getInitialState(){
+		return {
+			winners:[],
+			losers: [],
+			currentSet: 0
+		}
+	},
 	render() {
+		console.log(this.props.selected);
 		return(
 			<div className="row">
 				<div className="col-xs-12 round-display">

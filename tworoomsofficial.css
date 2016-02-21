@@ -16,6 +16,14 @@ html, body {
 	padding: 20px;
 }
 
+.question-box {
+	background-color: #eee;
+	margin-top: 30px;
+	margin-bottom: 0px;
+	padding: 10px;
+	border-radius: 6px 6px 0px 0px;
+}
+
 .start-button {
 	padding: 10px;
 	background-color: #C44949;

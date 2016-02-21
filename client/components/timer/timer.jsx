@@ -7,8 +7,8 @@ Timer = React.createClass({
 		return {
 		  endTime: null,
 		  paused: true,
-		  minutesRemaining: this.props.minutes,
-		  secondsRemaining: '00'
+		  minutesRemaining: '0',
+		  secondsRemaining: '05'
 		};
 	},
 	componentWillReceiveProps(nextProps){
@@ -37,7 +37,10 @@ Timer = React.createClass({
 		}
 	},
 	timesUp: function() {
-		return this.state.minutesRemaining <= 0 && this.state.secondsRemaining <= 0;
+		var endTime = this.state.endTime;
+		var now = moment();
+		if(!endTime){ return false; }
+		return endTime.diff(now) <= 0;
 	},
 	onRoundOver() {
 		this.clearInterval();

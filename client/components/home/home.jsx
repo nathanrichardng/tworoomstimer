@@ -15,7 +15,7 @@ Home = React.createClass({
 					<h3>Home Page</h3>
 					<p>Generic home page for the time being</p>
 				</div>
-				<a href="/start"><button className="btn btn-info col-xs-12">Play with Cards</button></a>
+				<a href="/game"><button className="btn btn-info col-xs-12">Play with Cards</button></a>
 			</div>
 		)
 	}
