@@ -7,11 +7,15 @@ Timer = React.createClass({
 		return {
 		  endTime: null,
 		  paused: true,
-		  minutesRemaining: '0',
+		  minutesRemaining: this.props.minutes,
 		  secondsRemaining: '00'
 		};
 	},
 	componentWillReceiveProps(nextProps){
+		//dont do anything if time is up. This keeps the "times up" message displayed
+		if(nextProps.minutes === 0) {
+			return false;
+		}
 		this.setState({ 
 			endTime: null,
 			paused: true,
@@ -59,7 +63,14 @@ Timer = React.createClass({
 	  	this.clearInterval();
 	},
 	resetTimer: function() {
-		this.setState(this.getInitialState());
+		//for testing purposes only
+		this.setState({
+			endTime: null,
+			paused: true,
+			minutesRemaining: '0',
+			secondsRemaining: '00'
+		})
+		//this.setState(this.getInitialState());
 	},
 	clearInterval: function() {
 		clearInterval(this.interval);
