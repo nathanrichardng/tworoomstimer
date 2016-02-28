@@ -6,13 +6,17 @@ PostGame = React.createClass({
 		return {
 			winners:[],
 			losers: [],
-			stage: "EnterLocations"
+			stage: "RecordGuesses",
+			gamblerChose: false,
 		}
 	},
 	selectedWithCore() {
 		var selectedWithCore = this.props.selected;
 			selectedWithCore.push("Core Set");
 		return selectedWithCore;
+	},
+	enterGuess(guess) {
+		this.setState({ gamblerChose: guess, stage: "EnterLocations" });
 	},
 	calculateWinnersByLocation(roomArray) {
 		var winners = this.state.winners;
@@ -21,7 +25,14 @@ PostGame = React.createClass({
 		//Calculate winners in each set
 		for(var i=0; i<sets.length; i++) {
 			var set = CardSets.GetSetFromName(sets[i]);
+			if(set.winCon === "location") {
 				set.calculateWinners(roomArray, winners, losers);
+			}
+		}
+		//calculate if gambler won
+		if(this.state.gamblerChose) {
+			var gambler = CardSets.GetSetFromName("The Gambler");
+				gambler.calculateWinners(this.state.gamblerChose, winners, losers);
 		}
 		//Update state
 		this.setState({ winners: winners, losers:losers, stage: "DisplayWinners" });
@@ -29,7 +40,15 @@ PostGame = React.createClass({
 		console.log("losers", losers);
 	},
 	renderStage() {
-		if(this.state.stage === "EnterLocations") {
+		if(this.state.stage === "RecordGuesses") {
+			return (
+				<EnterGuess
+					sets={this.props.selected}
+					enterGuess={this.enterGuess} />
+
+			)
+		}
+		else if(this.state.stage === "EnterLocations") {
 			return (
 				<EnterLocations
 					sets={this.selectedWithCore()}

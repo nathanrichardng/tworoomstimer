@@ -9,9 +9,11 @@ EnterLocations = React.createClass({
 		var cards = [];
 		for(var i=0; i<sets.length; i++) {
 			var set = CardSets.GetSetFromName(sets[i]);
-			for(var j=0; j<set.cards.length; j++) {
-				var card = set.cards[j]
-				cards.push(card);
+			if(set.winCon === "location") {
+				for(var j=0; j<set.cards.length; j++) {
+					var card = set.cards[j]
+					cards.push(card);
+				}
 			}
 		}
 		return cards;
@@ -25,7 +27,7 @@ EnterLocations = React.createClass({
 		return(
 			<div className="container">
 				<div className="jumbotron">
-					<h3>Who's in room number 1?</h3>
+					<h3>Pick a room, and tell me who's in it.</h3>
 				</div>
 				<SelectMultiple
 					ref="locations"
