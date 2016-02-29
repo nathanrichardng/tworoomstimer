@@ -46,7 +46,7 @@ PostGame = React.createClass({
 		}
 		//calculate if gambler won
 		if(this.state.gamblerChose) {
-			var gambler = CardSets.GetSetFromName("The Gambler");
+			var gambler = CardSets.GetSetFromName("Gambler");
 				gambler.calculateWinners(this.state.gamblerChose, winners, losers);
 		}
 		//calculate if private eye won

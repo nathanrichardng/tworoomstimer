@@ -6,6 +6,7 @@ Choice = React.createClass({
 	},
 	submitAnswer() {
 		var choice = this.refs.choice.getSelected();
+		if(!choice) { return false; }
 		console.log("choice picked", choice);
 		this.props.submitAnswer(choice);
 	},

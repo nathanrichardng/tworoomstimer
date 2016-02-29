@@ -4,13 +4,13 @@ GamblerGuess = React.createClass({
 		enterGuess: React.PropTypes.func
 	},
 	componentWillMount() {
-		var hasBomber = $.inArray("The Gambler", this.props.sets) >= 0;
+		var hasBomber = $.inArray("Gambler", this.props.sets) >= 0;
 		if(!hasBomber) {
 			this.props.enterGuess(false);
 		}
 	},
 	render() {
-		var gambler = CardSets.GetSetFromName("The Gambler");
+		var gambler = CardSets.GetSetFromName("Gambler");
 		return(
 			<Question
 				prompt={gambler.prompt}
