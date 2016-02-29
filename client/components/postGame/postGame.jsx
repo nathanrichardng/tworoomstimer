@@ -12,14 +12,21 @@ PostGame = React.createClass({
 			stage: "SniperGuesses",
 			sniperChose: false,
 			gamblerChose: false,
-			privateEyeChose: false
+			privateEyeChose: false,
+			buried: false
 		}
 	},
 	sniperGuesses(guess) {
 		this.setState({ sniperChose: guess, stage: "GamblerGuesses" });
 	},
 	gamblerGuesses(guess) {
-		this.setState({ gamblerChose: guess, stage: "EnterLocations" });
+		this.setState({ gamblerChose: guess, stage: "PrivateEyeGuesses" });
+	},
+	privateEyeGuesses(guess) {
+		this.setState({ privateEyeChose: guess, stage: "RevealBuried" });
+	},
+	enterBuried(card) {
+		this.setState({ buried: card, stage: "EnterLocations" });
 	},
 	calculateWinnersByLocation(roomArray) {
 		var winners = this.state.winners;
@@ -42,6 +49,11 @@ PostGame = React.createClass({
 			var gambler = CardSets.GetSetFromName("The Gambler");
 				gambler.calculateWinners(this.state.gamblerChose, winners, losers);
 		}
+		//calculate if private eye won
+		if(this.state.privateEyeChose && this.state.buried) {
+			var privateEye = CardSets.GetSetFromName("Private Eye");
+				privateEye.calculateWinners(this.state.privateEyeChose, this.state.buried, winners, losers);
+		}
 		//Update state
 		this.setState({ winners: winners, losers:losers, stage: "DisplayWinners" });
 		console.log("winners", winners);
@@ -61,6 +73,22 @@ PostGame = React.createClass({
 				<GamblerGuess
 					sets={this.state.selected}
 					enterGuess={this.gamblerGuesses} />
+
+			)
+		}
+		else if(this.state.stage === "PrivateEyeGuesses") {
+			return (
+				<PrivateEyeGuess
+					sets={this.state.selected}
+					enterGuess={this.privateEyeGuesses} />
+
+			)
+		}
+		else if(this.state.stage === "RevealBuried") {
+			return (
+				<EnterBuried
+					sets={this.state.selected}
+					enterBuried={this.enterBuried} />
 
 			)
 		}
