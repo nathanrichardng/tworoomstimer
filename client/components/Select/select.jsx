@@ -1,4 +1,4 @@
-SelectMultiple = React.createClass({
+Select = React.createClass({
 	propTypes: {
 		options: React.PropTypes.array,
 		className: React.PropTypes.string
@@ -16,12 +16,7 @@ SelectMultiple = React.createClass({
 	},
 
 	getSelected() {
-		var options = this.refs.select;
-		var selected = [];
-		for(var i=0; i<options.length; i++) {
-			if(options[i].selected) { selected.push(options[i].value); }
-		}
-		return selected;
+		return this.refs.select.value;
 	},
 
 	render() {

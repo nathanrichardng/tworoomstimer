@@ -10,11 +10,13 @@ Question = React.createClass({
 	},
 	renderOptions() {
 		var submitAnswer = this.submitAnswer; //maintain scope
-		return this.props.options.map(function(option) {
-			return (
-				<button key={option} className="btn btn-info col-xs-12" onClick={submitAnswer} value={option}>{option}</button>
-			)
-		});
+		var options = this.props.options;
+		return (
+			<div>
+				<button key={options[0]} className="btn btn-danger col-xs-6" onClick={submitAnswer} value={options[0]}>{options[0]}</button>
+				<button key={options[1]} className="btn btn-info col-xs-6" onClick={submitAnswer} value={options[1]}>{options[1]}</button>
+			</div>
+		)
 	},
 	render() {
 		return(

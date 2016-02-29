@@ -1,4 +1,4 @@
-EnterGuess = React.createClass({
+GamblerGuess = React.createClass({
 	propTypes: {
 		sets: React.PropTypes.array,
 		enterGuess: React.PropTypes.func

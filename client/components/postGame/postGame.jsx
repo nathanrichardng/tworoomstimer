@@ -3,19 +3,22 @@ PostGame = React.createClass({
 		selected: React.PropTypes.array
 	},
 	getInitialState(){
+		var selectedWithCore = this.props.selected;
+			selectedWithCore.push("Core Set");
 		return {
 			winners:[],
 			losers: [],
-			stage: "RecordGuesses",
+			selected: selectedWithCore,
+			stage: "SniperGuesses",
+			sniperChose: false,
 			gamblerChose: false,
+			privateEyeChose: false
 		}
 	},
-	selectedWithCore() {
-		var selectedWithCore = this.props.selected;
-			selectedWithCore.push("Core Set");
-		return selectedWithCore;
+	sniperGuesses(guess) {
+		this.setState({ sniperChose: guess, stage: "GamblerGuesses" });
 	},
-	enterGuess(guess) {
+	gamblerGuesses(guess) {
 		this.setState({ gamblerChose: guess, stage: "EnterLocations" });
 	},
 	calculateWinnersByLocation(roomArray) {
@@ -29,6 +32,11 @@ PostGame = React.createClass({
 				set.calculateWinners(roomArray, winners, losers);
 			}
 		}
+		//caclulate if sniper won
+		if(this.state.sniperChose) {
+			var sniper = CardSets.GetSetFromName("Sniper, Target, and Decoy");
+				sniper.calculateWinners(this.state.sniperChose, winners, losers);
+		}
 		//calculate if gambler won
 		if(this.state.gamblerChose) {
 			var gambler = CardSets.GetSetFromName("The Gambler");
@@ -40,18 +48,26 @@ PostGame = React.createClass({
 		console.log("losers", losers);
 	},
 	renderStage() {
-		if(this.state.stage === "RecordGuesses") {
+		if(this.state.stage === "SniperGuesses") {
 			return (
-				<EnterGuess
-					sets={this.props.selected}
-					enterGuess={this.enterGuess} />
+				<SniperGuess
+					sets={this.state.selected}
+					enterGuess={this.sniperGuesses} />
+
+			)
+		}
+		else if(this.state.stage === "GamblerGuesses") {
+			return (
+				<GamblerGuess
+					sets={this.state.selected}
+					enterGuess={this.gamblerGuesses} />
 
 			)
 		}
 		else if(this.state.stage === "EnterLocations") {
 			return (
 				<EnterLocations
-					sets={this.selectedWithCore()}
+					sets={this.state.selected}
 					calculateWinnersByLocation={this.calculateWinnersByLocation} />
 			)
 		}
@@ -66,7 +82,7 @@ PostGame = React.createClass({
 		}
 	},
 	render() {
-		console.log(this.props.selected);
+		console.log(this.state.selected);
 		return(
 			<div className="container">
 				<div className="row">
