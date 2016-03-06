@@ -26,7 +26,14 @@ PostGame = React.createClass({
 		this.setState({ privateEyeChose: guess, stage: "RevealBuried" });
 	},
 	enterBuried(card) {
-		this.setState({ buried: card, stage: "EnterLocations" });
+		this.setState({ buried: card, stage: "AskQuestions" });
+	},
+	calculateWinnersByAnswers(winners, losers) {
+		var updatedWinners = this.state.winners;
+		var updatedLosers = this.state.losers;
+			updatedWinners = updatedWinners.concat(winners);
+			updatedLosers = updatedLosers.concat(losers);
+			this.setState({ winners: updatedWinners, losers: updatedLosers, stage: "EnterLocations" });
 	},
 	calculateWinnersByLocation(roomArray) {
 		var winners = this.state.winners;
@@ -90,6 +97,13 @@ PostGame = React.createClass({
 					sets={this.state.selected}
 					enterBuried={this.enterBuried} />
 
+			)
+		}
+		else if(this.state.stage === "AskQuestions") {
+			return (
+				<AskQuestions
+					sets={this.state.selected}
+					calculateWinnersByAnswers={this.calculateWinnersByAnswers} />
 			)
 		}
 		else if(this.state.stage === "EnterLocations") {

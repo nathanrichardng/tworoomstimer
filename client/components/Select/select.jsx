@@ -12,6 +12,7 @@ Select = React.createClass({
 	        </option>
 	      );
 	    });
+	    optionNodes.unshift(<option disabled="true" selected="true" value="None Selected" key="None Selected">None Selected</option>);
 	    return optionNodes;
 	},
 
@@ -21,7 +22,7 @@ Select = React.createClass({
 
 	render() {
 		return(
-			<select multiple="true" className={this.props.className || ""} ref="select">
+			<select className={this.props.className || ""} ref="select">
 				{this.renderOptions()}
 			</select>
 		)

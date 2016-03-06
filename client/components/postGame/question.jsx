@@ -5,7 +5,6 @@ Question = React.createClass({
 		submitAnswer: React.PropTypes.func
 	},
 	submitAnswer(e) {
-		console.log("gambler picked", e.target.value);
 		this.props.submitAnswer(e.target.value);
 	},
 	renderOptions() {
