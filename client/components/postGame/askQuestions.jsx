@@ -19,6 +19,12 @@ AskQuestions = React.createClass({
 			losers: []
 		}
 	},
+	componentWillMount() {
+		if(this.state.sets.length < 1) {
+			//go to next stage if there are no questions to ask;
+			this.props.calculateWinnersByAnswers(this.state.winners, this.state.losers);
+		}
+	},
 	componentWillUpdate(nextProps, nextState) {
 		if(nextState.currentIndex >= nextState.sets.length) { 
 			this.props.calculateWinnersByAnswers(this.state.winners, this.state.losers);
