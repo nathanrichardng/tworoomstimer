@@ -26,7 +26,18 @@ PostGame = React.createClass({
 		this.setState({ privateEyeChose: guess, stage: "RevealBuried" });
 	},
 	enterBuried(card) {
-		this.setState({ buried: card, stage: "AskQuestions" });
+		this.setState({ buried: card, stage: "AskTyrant" });
+	},
+	calculatePredetermined(winners, losers) {
+		var sets = this.state.selected;
+		for(var i=0; i<sets.length; i++) {
+			var setName = sets[i];
+			var set = CardSets.GetSetFromName(setName);
+			if(set.winCon === "predetermined") {
+				set.calculateWinners(winners, losers);
+			}
+		}
+		this.setState({ winners: winners, losers: losers, stage: "DisplayWinners" });
 	},
 	calculateWinnersByAnswers(winners, losers) {
 		var updatedWinners = this.state.winners;
@@ -34,6 +45,16 @@ PostGame = React.createClass({
 			updatedWinners = updatedWinners.concat(winners);
 			updatedLosers = updatedLosers.concat(losers);
 			this.setState({ winners: updatedWinners, losers: updatedLosers, stage: "EnterLocations" });
+	},
+	calculateNuclearTyrantWin(answer) {
+		if(!answer) { this.setState({ stage: "AskQuestions" }) }
+		else {
+			var winners = this.state.winners;
+			var losers = this.state.losers;
+			var nuclearTyrant = CardSets.GetSetFromName("Nuclear Tyrant");
+			var nextStage = nuclearTyrant.calculateWinners(answer, winners, losers, this.state.selected);
+			this.setState({ winners: winners, losers: losers, stage: nextStage });
+		}
 	},
 	calculateWinnersByLocation(roomArray) {
 		var winners = this.state.winners;
@@ -61,8 +82,8 @@ PostGame = React.createClass({
 			var privateEye = CardSets.GetSetFromName("Private Eye");
 				privateEye.calculateWinners(this.state.privateEyeChose, this.state.buried, winners, losers);
 		}
-		//Update state
-		this.setState({ winners: winners, losers:losers, stage: "DisplayWinners" });
+		//calculate predefined and display winners
+		this.calculatePredetermined(winners, losers);
 		console.log("winners", winners);
 		console.log("losers", losers);
 	},
@@ -96,6 +117,14 @@ PostGame = React.createClass({
 				<EnterBuried
 					sets={this.state.selected}
 					enterBuried={this.enterBuried} />
+
+			)
+		}
+		else if(this.state.stage === "AskTyrant") {
+			return (
+				<AskTyrant
+					sets={this.state.selected}
+					submitAnswer={this.calculateNuclearTyrantWin} />
 
 			)
 		}

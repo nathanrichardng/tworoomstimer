@@ -4,8 +4,8 @@ GamblerGuess = React.createClass({
 		enterGuess: React.PropTypes.func
 	},
 	componentWillMount() {
-		var hasBomber = $.inArray("Gambler", this.props.sets) >= 0;
-		if(!hasBomber) {
+		var hasGambler = $.inArray("Gambler", this.props.sets) >= 0;
+		if(!hasGambler) {
 			this.props.enterGuess(false);
 		}
 	},
