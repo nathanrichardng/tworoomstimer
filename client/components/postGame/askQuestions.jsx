@@ -8,6 +8,8 @@ AskQuestions = React.createClass({
 		var sets = [];
 		var hasDr = false;
 		var hasEngineer = false;
+		var hasNurse = false;
+		var hasTinkerer = false;
 		for(var i=0; i<this.props.sets.length; i++) {
 			var setName = this.props.sets[i];
 			var set = CardSets.GetSetFromName(setName);
@@ -15,15 +17,27 @@ AskQuestions = React.createClass({
 			var isNurseOrTinkerer = (set.name === "Nurse" || set.name === "Tinkerer");
 			//exclude the buried. exclude nurse if doctor is present. exclude tinkerer if engineer is present.
 			if (set.winCon === "passFail" && !isBuried) {
-				if(!isNurseOrTinkerer) {
-					if(set.name === "Doctor") { hasDr = true; }
-					if(set.name === "Engineer") { hasEngineer = true; }
+				if(set.name === "Doctor") { 
+					hasDr = true;
+					sets.push(set); 
+				}
+				else if(set.name === "Engineer") { 
+					hasEngineer = true;
+					sets.push(set); 
+				}
+				else if(set.name === "Nurse") {
+					hasNurse = true;
+				}
+				else if(set.name === "Tinkerer") {
+					hasTinkerer = true;
+				}
+				else {
 					sets.push(set);
 				}
 			}
 		}
-		if(!hasDr) { sets.push(CardSets.GetSetFromName("Nurse")); }
-		if(!hasEngineer) { sets.push(CardSets.GetSetFromName("Tinkerer")); }
+		if(!hasDr && hasNurse) { sets.push(CardSets.GetSetFromName("Nurse")); }
+		if(!hasEngineer && hasTinkerer) { sets.push(CardSets.GetSetFromName("Tinkerer")); }
 		return {
 			currentIndex: 0,
 			sets: sets,

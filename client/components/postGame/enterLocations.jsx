@@ -14,7 +14,8 @@ EnterLocations = React.createClass({
 			if(set.winCon === "location" && !buried) {
 				for(var j=0; j<set.cards.length; j++) {
 					var card = set.cards[j]
-					cards.push(card);
+					var isCore = (card === "Blue Team" || card === "Red Team");
+					if(!isCore) { cards.push(card); }	
 				}
 			}
 		}
