@@ -1,6 +1,7 @@
 EnterLocations = React.createClass({
 	propTypes: {
 		sets: React.PropTypes.array,
+		buried: React.PropTypes.string,
 		calculateWinnersByLocation: React.PropTypes.func
 	},
 	getCards() {
@@ -9,7 +10,8 @@ EnterLocations = React.createClass({
 		var cards = [];
 		for(var i=0; i<sets.length; i++) {
 			var set = CardSets.GetSetFromName(sets[i]);
-			if(set.winCon === "location") {
+			var buried = (set.name === this.props.buried);
+			if(set.winCon === "location" && !buried) {
 				for(var j=0; j<set.cards.length; j++) {
 					var card = set.cards[j]
 					cards.push(card);

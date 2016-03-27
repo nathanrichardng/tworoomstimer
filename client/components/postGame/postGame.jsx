@@ -52,7 +52,7 @@ PostGame = React.createClass({
 			var winners = this.state.winners;
 			var losers = this.state.losers;
 			var nuclearTyrant = CardSets.GetSetFromName("Nuclear Tyrant");
-			var nextStage = nuclearTyrant.calculateWinners(answer, winners, losers, this.state.selected);
+			var nextStage = nuclearTyrant.calculateWinners(answer, winners, losers, this.state.selected, this.state.buried);
 			this.setState({ winners: winners, losers: losers, stage: nextStage });
 		}
 	},
@@ -121,9 +121,11 @@ PostGame = React.createClass({
 			)
 		}
 		else if(this.state.stage === "AskTyrant") {
+			console.log("state", this.state);
 			return (
 				<AskTyrant
 					sets={this.state.selected}
+					buried={this.state.buried}
 					submitAnswer={this.calculateNuclearTyrantWin} />
 
 			)
@@ -132,6 +134,7 @@ PostGame = React.createClass({
 			return (
 				<AskQuestions
 					sets={this.state.selected}
+					buried={this.state.buried}
 					calculateWinnersByAnswers={this.calculateWinnersByAnswers} />
 			)
 		}
@@ -139,6 +142,7 @@ PostGame = React.createClass({
 			return (
 				<EnterLocations
 					sets={this.state.selected}
+					buried={this.state.buried}
 					calculateWinnersByLocation={this.calculateWinnersByLocation} />
 			)
 		}

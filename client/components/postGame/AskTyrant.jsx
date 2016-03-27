@@ -1,12 +1,15 @@
 AskTyrant = React.createClass({
 	propTypes: {
 		sets: React.PropTypes.array,
-		submitAnswer: React.PropTypes.func
+		submitAnswer: React.PropTypes.func,
+		buried: React.PropTypes.string
 	},
 	componentWillMount() {
 		var hasNuclearTyrant = $.inArray("Nuclear Tyrant", this.props.sets) >= 0;
+		var nuclearTyrantBuried = (this.props.buried === "Nuclear Tyrant");
+		console.log("buried", this.props.buried);
 		console.log("has nuclear tyrant", hasNuclearTyrant);
-		if(!hasNuclearTyrant) {
+		if(!hasNuclearTyrant || nuclearTyrantBuried) {
 			this.props.submitAnswer(false);
 		}
 	},
