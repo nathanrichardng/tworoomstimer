@@ -1,7 +1,7 @@
 EnterLocations = React.createClass({
 	propTypes: {
 		sets: React.PropTypes.array,
-		buried: React.PropTypes.string,
+		buried: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.bool ]),
 		calculateWinnersByLocation: React.PropTypes.func
 	},
 	getCards() {

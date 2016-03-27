@@ -2,7 +2,7 @@ AskTyrant = React.createClass({
 	propTypes: {
 		sets: React.PropTypes.array,
 		submitAnswer: React.PropTypes.func,
-		buried: React.PropTypes.string
+		buried: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.bool ])
 	},
 	componentWillMount() {
 		var hasNuclearTyrant = $.inArray("Nuclear Tyrant", this.props.sets) >= 0;

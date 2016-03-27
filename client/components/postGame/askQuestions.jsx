@@ -1,18 +1,29 @@
 AskQuestions = React.createClass({
 	propTypes: {
 		sets: React.PropTypes.array,
-		buried: React.PropTypes.string,
+		buried: React.PropTypes.oneOfType([ React.PropTypes.string, React.PropTypes.bool ]),
 		calculateWinnersByAnswers: React.PropTypes.func
 	},
 	getInitialState() {
 		var sets = [];
+		var hasDr = false;
+		var hasEngineer = false;
 		for(var i=0; i<this.props.sets.length; i++) {
 			var setName = this.props.sets[i];
 			var set = CardSets.GetSetFromName(setName);
-			if (set.winCon === "passFail") {
-				sets.push(set);
+			var isBuried = (set.name === this.props.buried);
+			var isNurseOrTinkerer = (set.name === "Nurse" || set.name === "Tinkerer");
+			//exclude the buried. exclude nurse if doctor is present. exclude tinkerer if engineer is present.
+			if (set.winCon === "passFail" && !isBuried) {
+				if(!isNurseOrTinkerer) {
+					if(set.name === "Doctor") { hasDr = true; }
+					if(set.name === "Engineer") { hasEngineer = true; }
+					sets.push(set);
+				}
 			}
 		}
+		if(!hasDr) { sets.push(CardSets.GetSetFromName("Nurse")); }
+		if(!hasEngineer) { sets.push(CardSets.GetSetFromName("Tinkerer")); }
 		return {
 			currentIndex: 0,
 			sets: sets,
@@ -27,39 +38,12 @@ AskQuestions = React.createClass({
 			this.props.calculateWinnersByAnswers(this.state.winners, this.state.losers);
 			return;
 		}
-		//otherwise check if the next card is buried and skip it
-		var nextSet = this.state.sets[this.state.currentIndex];
-		console.log("next set", nextSet);
-		if(nextSet.name === this.props.buried) { //skip set if buried
-			var nextIndex = this.state.currentIndex + 1; 
-			if (nextIndex >= this.state.sets.length) {
-				console.log("should calculate winners here");
-				this.props.calculateWinnersByAnswers(this.state.winners, this.state.losers);
-			}
-			else {
-				this.setState({ currentIndex: nextIndex }); 
-			}
-		}
 	},
 	componentWillUpdate(nextProps, nextState) {
 		//calculate winners if we are at end of set
 		if(nextState.currentIndex >= nextState.sets.length) { 
 			this.props.calculateWinnersByAnswers(this.state.winners, this.state.losers);
 			return;
-		}
-		//otherwise check if the next card is buried and skip it
-		var nextSet = nextState.sets[nextState.currentIndex];
-		console.log("next set", nextSet);
-		console.log("buried", nextProps.buried);
-		if(nextSet.name === this.props.buried) {
-			var nextIndex = nextState.currentIndex + 1;
-			if (nextIndex >= this.state.sets.length) {
-				console.log("should calculate winners here");
-				this.props.calculateWinnersByAnswers(nextState.winners, nextState.losers);
-			}
-			else {
-				this.setState({ currentIndex: nextIndex }); 
-			} 
 		}
 	},
 	getCurrentSet() {
