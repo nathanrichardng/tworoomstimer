@@ -4,7 +4,7 @@ Game = React.createClass({
 		return {
 			round: -1,
 			players: 6,
-			setOptions: CardSets.GetSets(),
+			setOptions: CardSets.GetSets().sort(),
 			selected: []
 		}
 	},
