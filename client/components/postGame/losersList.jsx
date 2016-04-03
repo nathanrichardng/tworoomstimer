@@ -3,7 +3,7 @@ LosersList = React.createClass({
 		losers: React.PropTypes.array
 	},
 	renderLosers() {
-		var loserNodes = this.props.losers.map(function(loser) {
+		var loserNodes = this.props.losers.sort().map(function(loser) {
 	      return (
 	        <li key={loser} className="list-group-item">{loser}</li>
 	      );

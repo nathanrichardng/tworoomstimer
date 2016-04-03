@@ -3,7 +3,7 @@ WinnersList = React.createClass({
 		winners: React.PropTypes.array
 	},
 	renderWinners() {
-		var winnerNodes = this.props.winners.map(function(winner) {
+		var winnerNodes = this.props.winners.sort().map(function(winner) {
 	      return (
 	        <li key={winner} className="list-group-item">{winner}</li>
 	      );

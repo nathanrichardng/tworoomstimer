@@ -21,7 +21,7 @@ Choice = React.createClass({
 				cards.push(card);
 			}
 		}
-		return cards;
+		return cards.sort();
 	},
 	render() {
 		return(

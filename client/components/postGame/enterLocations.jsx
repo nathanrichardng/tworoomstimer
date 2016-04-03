@@ -34,7 +34,7 @@ EnterLocations = React.createClass({
 				</div>
 				<SelectMultiple
 					ref="locations"
-					options={this.getCards()}
+					options={this.getCards().sort()}
 					className="col-xs-12 set-select" />
 				<button className="btn btn-info col-xs-12 start-button" onClick={this.calculateWinners}>Next</button>
 			</div>
