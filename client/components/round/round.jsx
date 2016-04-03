@@ -72,10 +72,11 @@ Round = React.createClass({
 				<div className="col-xs-12 round-display">
 					<h3>Round {this.props.round}</h3>
 				</div>
-				<div className="col-xs-12 timer-box">
+				<div className="col-xs-12">
 					<Timer 
 						minutes={this.calculateTimerLength()}
-						onRoundOver={this.onRoundOver} />
+						onRoundOver={this.onRoundOver}
+						onClick={this.toggleZoom} />
 				</div>
 				{this.renderHostages()}
 				<NextRoundButton

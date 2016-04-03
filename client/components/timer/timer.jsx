@@ -8,7 +8,8 @@ Timer = React.createClass({
 		  endTime: null,
 		  paused: true,
 		  minutesRemaining: this.props.minutes,
-		  secondsRemaining: '00'
+		  secondsRemaining: '00',
+		  timerZoomed: false
 		};
 	},
 	componentWillReceiveProps(nextProps){
@@ -20,7 +21,8 @@ Timer = React.createClass({
 			endTime: null,
 			paused: true,
 			minutesRemaining: nextProps.minutes,
-			secondsRemaining: '00'
+			secondsRemaining: '00',
+			timerZoomed: false
 		});
 	},
 	tick: function() {
@@ -72,6 +74,11 @@ Timer = React.createClass({
 		})
 		//this.setState(this.getInitialState());
 	},
+	toggleZoom(e) {
+		e.preventDefault();
+		var zoomed = !this.state.timerZoomed;
+		this.setState({ timerZoomed: zoomed });
+	},
 	clearInterval: function() {
 		clearInterval(this.interval);
 	},
@@ -103,14 +110,14 @@ Timer = React.createClass({
 	},
 	renderTimeUp: function() {
 		return(
-			<div>
+			<div className="time-box" onClick={this.toggleZoom}>
 				<div className="times-up">Times Up!</div>
 			</div>
 		);
 	},
 	renderTime: function() {
 		return (
-			<div>
+			<div className="time-box" onClick={this.toggleZoom}>
 		    	<div className="timer-minutes">{this.state.minutesRemaining}</div>
 		    	<div className="timer-seconds">{this.state.secondsRemaining}</div>
 		    </div>
@@ -125,9 +132,10 @@ Timer = React.createClass({
 		}
 	},
 	render: function() {
+		var timerClass = this.state.timerZoomed ? "col-xs-12 zoomed timer-box" : "col-xs-12 timer-box";
 		return (
-			<div className="col-xs-12">
-				<div className="time-box">{this.renderTimer()}</div>
+			<div className={timerClass}>
+				{this.renderTimer()}
 				<div className="control-box">{this.renderControls()}</div>
 		    </div>
 		)

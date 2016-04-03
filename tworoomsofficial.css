@@ -47,14 +47,32 @@ html, body {
 	box-shadow: 0px 0px 25px rgba(0, 0, 0, .7);
 }
 
+.timer-box.zoomed {
+	height: 160px;
+	position: relative;
+}
+
 .time-box {
 	display: inline-block;
 	float: left;
 }
 
+.zoomed .time-box {
+	width: 240px;
+	height: 120px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-120px, -60px);
+}
+
 .control-box {
 	display: inline-block;
 	float: right;
+}
+
+.zoomed .control-box {
+	display: none;
 }
 
 .timer-minutes, .timer-seconds {
@@ -69,6 +87,14 @@ html, body {
 	font-size: 24px;
 }
 
+.zoomed .timer-minutes, .zoomed .timer-seconds {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	font-size: 48px;
+	margin: 10px;
+}
+
 .times-up {
 	height: 50px;
 	line-height: 50px;
@@ -80,6 +106,16 @@ html, body {
 	padding-left: 20px;
 	padding-right: 20px;
 	font-size: 24px;
+}
+
+.zoomed .times-up {
+	height: 100px;
+	width: 220px;
+	line-height: 100px;
+	margin: 10px;
+	font-size: 38px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .timer-control {
