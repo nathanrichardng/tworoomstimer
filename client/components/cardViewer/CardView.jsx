@@ -17,24 +17,12 @@ CardView = React.createClass({
 		}
 		return style;
 	},
-	cardHolderStyle() {
-		//move this piece to CardViewer so we can put the card select component in it.
-		var style = {
-			width: "100vw",
-			height: "100vh",
-			backgroundColor: "#333",
-			position: "relative"
-		}
-		return style;
-	},
 	render: function() {
 		return (
-			<div className="card-holder" style={this.cardHolderStyle()}>
-				<div className="card" style={this.cardStyle()}>
-					<h3>{this.props.name}</h3>
-					<hr/>
-					<p>{this.props.description}</p>
-				</div>
+			<div className="card" style={this.cardStyle()}>
+				<h3>{this.props.name}</h3>
+				<hr/>
+				<p>{this.props.description}</p>
 			</div>
 		)
 	}
