@@ -13,3 +13,11 @@ FlowRouter.route('/game', {
         });
 	}
 });
+
+FlowRouter.route('/cards', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { 
+			content: <CardViewer />
+        });
+	}
+});

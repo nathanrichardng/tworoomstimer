@@ -57,6 +57,7 @@ PostGame = React.createClass({
 		}
 	},
 	calculateWinnersByLocation(roomArray) {
+		//need to figure out why the president doesnt show up when anarchist -> clown selected
 		var winners = this.state.winners;
 		var losers = this.state.losers;
 		var sets = this.props.selected;
