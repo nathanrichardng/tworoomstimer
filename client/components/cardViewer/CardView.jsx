@@ -8,7 +8,7 @@ CardView = React.createClass({
 		var style = {
 			backgroundColor: this.props.color,
 			position: "absolute",
-			top: "30px",
+			top: "40px",
 			bottom: "30px",
 			left: "20px",
 			right: "20px",

@@ -11,8 +11,8 @@ ListSelect = React.createClass({
 		var onSelect = this.onSelect;
 		var optionNodes = this.props.options.map(function(option) {
 			var className;
-			if (selected === option) { className = "list-group-item selected"; }
-			else { className = "list-group-item"; }
+			if (selected === option) { className = "list-group-item hover-pointer active"; }
+			else { className = "list-group-item hover-pointer"; }
 			return (
 				<li key={option} className={className} onClick={onSelect} data-value={option}>
 				  {option}

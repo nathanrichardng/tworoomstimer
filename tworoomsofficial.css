@@ -5,6 +5,10 @@ html, body {
 	overflow-x: hidden;
 }
 
+.hover-pointer:hover {
+	cursor: pointer;
+}
+
 .set-select {
 	background-color: steelblue;
 	color: #fff;
