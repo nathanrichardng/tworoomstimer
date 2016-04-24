@@ -10,6 +10,13 @@ CardViewer = React.createClass({
 		console.log("card", card);
 		this.setState({ selectedCard: card, showSelect: false });
 		console.log("selected", selection);
+		Feedback.profiles = {
+		  "somethingHappened": {
+		    sound: "/sounds/truck.ogg",
+		    vibrate: [500,50,500,50,100] 
+		  }
+		}
+		Feedback.provide("somethingHappened");
 	},
 	showSelect(e) {
 		e.preventDefault();
@@ -26,18 +33,27 @@ CardViewer = React.createClass({
 		return style;
 	},
 	backStyle() {
-		var style ={
+		var style = {
 			color: "#fff",
 			cursor: "pointer",
 			padding: "10px",
 		}
 		return style;
 	},
+	headerStyle(){
+		var style = {
+			color: "#fff"
+		}
+		return style;
+	},
 	render: function() {
+		//change this to always just be a list with links to the individual cards.
+		//that way the back button works between the cards and the list.
 		if (this.state.showSelect || !this.state.selectedCard) {
 			if(this.state.selectedCard) {
 				return (
 					<div>
+						<h3 style={this.headerStyle()}>Card Details</h3>
 						<ListSelect options={Cards.GetCards()} onSelect={this.handleSelection} selected={this.state.selectedCard.name}/>
 					</div>
 				)
@@ -45,6 +61,7 @@ CardViewer = React.createClass({
 			else {
 				return (
 					<div>
+						<h3 style={this.headerStyle()}>Card Details</h3>
 						<ListSelect options={Cards.GetCards()} onSelect={this.handleSelection} />
 					</div>
 				)
