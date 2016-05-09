@@ -10,13 +10,6 @@ CardViewer = React.createClass({
 		console.log("card", card);
 		this.setState({ selectedCard: card, showSelect: false });
 		console.log("selected", selection);
-		Feedback.profiles = {
-		  "somethingHappened": {
-		    sound: "/sounds/truck.ogg",
-		    vibrate: [500,50,500,50,100] 
-		  }
-		}
-		Feedback.provide("somethingHappened");
 	},
 	showSelect(e) {
 		e.preventDefault();

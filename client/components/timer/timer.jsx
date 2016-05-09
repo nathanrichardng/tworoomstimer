@@ -34,11 +34,15 @@ Timer = React.createClass({
 		  	this.clearInterval();
 		}
 		else {
-			var endTime = moment(this.state.endTime);
-			var diff = endTime.subtract(moment());
+			var endTime = this.state.endTime;
+			var duration = moment.duration(endTime.diff(moment()));
+			var minutesRemaining = duration.minutes();
+			var secondsRemaining = duration.seconds();
+			if(secondsRemaining.toString().length === 1) { secondsRemaining = '0' + secondsRemaining.toString(); }
+			console.log("seconds remaining", secondsRemaining);
 			this.setState({
-				minutesRemaining: diff.format('m'),
-				secondsRemaining: diff.format('ss')
+				minutesRemaining: minutesRemaining,
+				secondsRemaining: secondsRemaining
 			});
 		}
 	},
@@ -51,11 +55,17 @@ Timer = React.createClass({
 	onRoundOver() {
 		this.clearInterval();
 		this.props.onRoundOver();
+		
+		Sounds.PlaySound("truck.ogg");
+		
 	},
 	startTimer: function() {
 		if(!this.state.paused) { return }
+		var minutesRemaining = this.state.minutesRemaining;
+		var secondsRemaining = this.state.secondsRemaining;
+		var endTime = moment().add(minutesRemaining, 'minutes').add(secondsRemaining, 'seconds');
 		this.setState({ 
-			endTime: moment().add(this.state.minutesRemaining, 'minutes').add(this.state.secondsRemaining, 'seconds'),
+			endTime: endTime,
 			paused: false 
 		});
 		this.interval = setInterval(this.tick, 500);

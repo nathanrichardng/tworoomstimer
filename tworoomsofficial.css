@@ -2,7 +2,18 @@
 html, body {
 	background-color: #585B63;
 	width: auto;
+}
+
+.title-image {
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	right: 0px;
+}
+
+.main-layout {
 	overflow-x: hidden;
+	animation: fadeIn 5s ease-out;
 }
 
 .hover-pointer:hover {
@@ -200,4 +211,16 @@ html, body {
 @-webkit-keyframes fromRight {
     from {right: -150px;}
     to {right: 20px;}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 100;}
+}
+
+
+@media(max-height: 400px) {
+	.zoom-hidden {
+		display: none;
+	}
 }

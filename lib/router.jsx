@@ -1,7 +1,8 @@
 FlowRouter.route('/', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { 
-			content: <Home />
+			content: <Home />,
+			footer: <Footer />
         });
 	}
 });
@@ -9,7 +10,8 @@ FlowRouter.route('/', {
 FlowRouter.route('/game', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { 
-			content: <Game />
+			content: <Game />,
+			footer: <Footer />
         });
 	}
 });
@@ -17,7 +19,8 @@ FlowRouter.route('/game', {
 FlowRouter.route('/cards', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { 
-			content: <CardViewer />
+			content: <CardViewer />,
+			footer: <Footer hideCard={true} />
         });
 	}
 });
